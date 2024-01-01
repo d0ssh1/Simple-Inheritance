@@ -6,6 +6,22 @@ protected:
     bool sex;
 public:
     Human(int a, bool s) : age(a), sex(s) {}
+
+    int GetAge() const {
+        return age;
+    }
+
+    void SetAge(int value) {
+        age = value;
+    }
+
+    bool GetSex() const {
+        return sex;
+    }
+
+    void SetSex(bool sexy) {
+        sex = sexy;
+    }
 };
 
 
