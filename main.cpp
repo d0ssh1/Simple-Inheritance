@@ -24,10 +24,16 @@ public:
     }
 };
 
+class Student : Human {
+private:
+    int group;
+public:
+    Student(int a, bool s, int g) : Human(a, s), group(g) {}
+};
 
 int main() {
-    Human Artem(19,1);
-    Human Eugene(19,1);
-    Human Vika(19,0);
+    Human Artem(19, 1);
+    Human Eugene(19, 1);
+    Human Vika(19, 0);
     return 0;
 }
