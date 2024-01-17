@@ -114,6 +114,41 @@ public:
 };
 
 
+class Archer : public Warrior {
+private:
+    string weapon = "bow";
+public:
+    Archer(int a, bool s, int group, int health, const string &name) : Warrior(a, s, group, health, name) {}
+
+    ~Archer() override {
+
+    }
+
+    void Hit() {
+        cout << "BOOM";
+    }
+};
+
+class Wizard : public Warrior {
+private:
+    int magicalPoints = 100;
+public:
+    void MagicalSplash() {
+        cout << "ElectroBOOM! *VZZZZ*";
+        this->magicalPoints -= 10;
+    }
+};
+
+class Squire : public Swordman, public Archer {
+public:
+    virtual void SecretPower() = 0;
+
+    void SayStupid() {
+        cout << "I can take your sword or bow!";
+    }
+};
+
+
 int main() {
     setlocale(LC_ALL, "Russian");
 
