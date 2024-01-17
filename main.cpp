@@ -72,7 +72,7 @@ public:
 
     bool CheckHP() {
         if (health <= 0) {
-            cout << "OH NO!! I'M DYINGGGG!!! HEELP SOMEBOOODY.......";
+            cout << "OH NO!! I'M DYINGGGG!!! HEELP SOMEBOOODY.......\n";
             isDead = true;
             return isDead;
         }
@@ -148,6 +148,32 @@ public:
     }
 };
 
+class Powers { // Интерфейс
+public:
+    virtual ~Powers() {}
+
+    virtual void magic() = 0;
+
+    virtual void melee_strike() = 0;
+};
+
+class GodLikeBoy : public Powers, public Human {
+private:
+    string dist_weapon = "GodBOW";
+    string melee_weapon = "GodSWORD";
+public:
+    GodLikeBoy(int a, bool s) : Human(a, s) {}
+
+    ~GodLikeBoy() override {};
+
+    void melee_strike() {
+        cout << "Hey! I'll use " << melee_weapon << " right now! HEHE\n";
+    }
+
+    void magic() {
+        cout << "OMG! I'll use " << dist_weapon << " right now! HOHO\n";
+    }
+};
 
 int main() {
     setlocale(LC_ALL, "Russian");
@@ -158,5 +184,10 @@ int main() {
 
     Swordman Papich(34, 1, 2, 5, "Arthas");
     Papich.Greeting();
+
+    GodLikeBoy Tema(19, 1);
+    Tema.melee_strike();
+    Tema.magic();
+
     return 0;
 }
