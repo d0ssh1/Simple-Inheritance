@@ -1,4 +1,7 @@
 #include <iostream>
+#include "string"
+
+using namespace std;
 
 class Human {
 protected:
@@ -22,13 +25,53 @@ public:
     void SetSex(bool sexy) {
         sex = sexy;
     }
+
+    virtual void Slogan() {
+        cout << "За орду! 🤮";
+    }
 };
 
-class Student : Human {
+class Warrior : public Human {
 private:
     int group;
+    int health;
+    string name;
 public:
-    Student(int a, bool s, int g) : Human(a, s), group(g) {}
+    Warrior(int a, bool s, int group, int health, const string &name) : Human(a, s), group(group), health(health),
+                                                                        name(name) {}
+
+    int getGroup() const {
+        return group;
+    }
+
+    void setGroup(int group) {
+        Warrior::group = group;
+    }
+
+    int getHealth() const {
+        return health;
+    }
+
+    void setHealth(int health) {
+        Warrior::health = health;
+    }
+
+    void Slogan() override {
+        cout << "За Альяяянс! 😎🆒";
+    }
+};
+
+class Leader : public Human {
+private:
+    string name;
+public:
+    void changeWarGroup(Warrior w, int g) {
+        w.setGroup(g);
+    }
+
+    void Slogan() override {
+        cout << "За Монолииит! 🫥";
+    }
 };
 
 int main() {
