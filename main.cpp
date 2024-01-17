@@ -32,6 +32,8 @@ public:
 };
 
 class Warrior : public Human {
+protected:
+    bool isDead = false;
 private:
     int group;
     int health;
@@ -39,6 +41,10 @@ private:
 public:
     Warrior(int a, bool s, int group, int health, const string &name) : Human(a, s), group(group), health(health),
                                                                         name(name) {}
+
+    virtual ~Warrior() {
+
+    }
 
     int getGroup() const {
         return group;
@@ -56,9 +62,22 @@ public:
         Warrior::health = health;
     }
 
+    const string &getName() const {
+        return name;
+    }
+
     void Slogan() override {
         cout << "За Альяяянс! 😎🆒";
     }
+
+    bool CheckHP() {
+        if (health <= 0) {
+            cout << "OH NO!! I'M DYINGGGG!!! HEELP SOMEBOOODY.......";
+            isDead = true;
+            return isDead;
+        }
+    }
+
 };
 
 class Leader : public Human {
@@ -74,9 +93,35 @@ public:
     }
 };
 
+class Swordman : public Warrior {
+private:
+    string weapon = "sword";
+public:
+    Swordman(int a, bool s, int group, int health, const string &name) : Warrior(a, s, group, health, name) {}
+
+    ~Swordman() override {
+
+    }
+
+    void Greeting() {
+        string name = this->getName();
+        int group = this->getGroup();
+        cout << "Greetings! I'm a swordman called " << name << ". My group is " << group << ". Bye!\n";
+        this->setHealth(0); // Хватает сил только на приветствие. Потом умирает (к сожалению). Никак не фиксится!
+        CheckHP();
+    }
+
+};
+
+
 int main() {
+    setlocale(LC_ALL, "Russian");
+
     Human Artem(19, 1);
     Human Eugene(19, 1);
     Human Vika(19, 0);
+
+    Swordman Papich(34, 1, 2, 5, "Arthas");
+    Papich.Greeting();
     return 0;
 }
